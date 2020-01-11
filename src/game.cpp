@@ -1,6 +1,8 @@
 #include "game.h"
+#include "game_engine.h"
+#include "game_engine.cpp"
 
-Game::Game():window(sf::VideoMode(WIDTH,HEIGHT),"Name")
+Game::Game():window(sf::VideoMode(WIDTH,HEIGHT),"SNAKE")
 {
     window.setFramerateLimit(60);
     
@@ -8,34 +10,17 @@ Game::Game():window(sf::VideoMode(WIDTH,HEIGHT),"Name")
 
 void Game::run()
 {
+    Game_Engine game_engine;
+    sf::Event event;
     while(window.isOpen())
     {
-        processEvents();
+        
+        game_engine.processEvents(event,window);
         update();
         render();
     }
 }
 
-void Game::processEvents()
-{
-    sf::Event event;
-    while(window.pollEvent(event))
-    {
-        switch(event.type)
-        {
-            case sf::Event::Closed:
-            window.close();
-            break;
-            case sf::Event::KeyPressed:
-            if(event.key.code==sf::Keyboard::Escape)
-            {
-                window.close();
-            }
-            
-            break;
-        }
-    }
-}
 
 void Game::update()
 {
