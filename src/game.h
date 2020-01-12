@@ -11,7 +11,7 @@ class Game
     void run();
 
     private:
-    void render();
+    void render(sf::RectangleShape &snake);
 
     sf::RenderWindow window;
 };

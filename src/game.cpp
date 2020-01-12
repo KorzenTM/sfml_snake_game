@@ -12,19 +12,19 @@ Game::Game():window(sf::VideoMode(WIDTH,HEIGHT),"SNAKE")
 
 void Game::run()
 {
+    Player player;
     Game_Engine game_engine;
     sf::Event event;
     while(window.isOpen())
     {
-        game_engine.processEvents(event,window);
-        render();
+        game_engine.processEvents(event,window,player.snake);
+        render(player.snake);
     }
 }
 
-void Game::render()
-{
-    Player player; 
+void Game::render(sf::RectangleShape &snake)
+{ 
     window.clear();
-    player.draw_player(window);
+    window.draw(snake);
     window.display();
 }

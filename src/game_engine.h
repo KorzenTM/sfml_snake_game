@@ -4,6 +4,6 @@
 class Game_Engine
 {
     public:
-    void processEvents(sf::Event event,sf::RenderWindow &thatWindow);
+    void processEvents(sf::Event event,sf::RenderWindow &thatWindow,sf::RectangleShape &snake);
 
 };

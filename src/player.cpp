@@ -1,9 +1,12 @@
 #include "player.h"
 
 
-void Player::draw_player(sf::RenderWindow &thatWindow)
+Player::Player():snake(sf::Vector2f(20.f, 20.f))
 {
-   sf::CircleShape shape(50.f);
-   shape.setFillColor(sf::Color(100,250,50)); 
-   thatWindow.draw(shape);
+   snake.setFillColor(sf::Color(100,250,50));
+}
+
+void Player::draw_player(sf::RenderWindow &thatWindow)
+{    
+   thatWindow.draw(snake);
 }
