@@ -11,7 +11,6 @@ class Game
     void run();
 
     private:
-    void update();
     void render();
 
     sf::RenderWindow window;

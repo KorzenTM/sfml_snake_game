@@ -1,6 +1,8 @@
 #include "game.h"
 #include "game_engine.h"
 #include "game_engine.cpp"
+#include "player.h"
+#include "player.cpp"
 
 Game::Game():window(sf::VideoMode(WIDTH,HEIGHT),"SNAKE")
 {
@@ -14,20 +16,15 @@ void Game::run()
     sf::Event event;
     while(window.isOpen())
     {
-        
         game_engine.processEvents(event,window);
-        update();
         render();
     }
 }
 
-
-void Game::update()
-{
-
-}
 void Game::render()
 {
+    Player player; 
     window.clear();
+    player.draw_player(window);
     window.display();
 }
