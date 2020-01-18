@@ -23,7 +23,7 @@ void Game::run()
     player.snake_1.setPosition(WIDTH/2,HEIGHT/2);
     player.snake_2.setPosition((WIDTH/2)-20,HEIGHT/2);
     player.snake_3.setPosition((WIDTH/2)-40,HEIGHT/2);
-    food.food.setPosition((std::rand()%WIDTH)+0,(std::rand()%HEIGHT)+0);
+    food.food.setPosition((std::rand()%(WIDTH/20)+0)*20,(std::rand()%(HEIGHT/20)+0)*20);
     while(window.isOpen())
     {
         game_engine.processEvents(event,window,player.snake_1,player.snake_2,player.snake_3,food.food);
