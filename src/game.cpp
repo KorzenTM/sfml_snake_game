@@ -7,6 +7,8 @@
 #include "food.cpp"
 #include <ctime>
 
+
+
 Game::Game():window(sf::VideoMode(WIDTH,HEIGHT),"SNAKE")
 {
     window.setFramerateLimit(60);
@@ -27,16 +29,6 @@ void Game::run()
     while(window.isOpen())
     {
         game_engine.processEvents(event,window,player.snake_1,player.snake_2,player.snake_3,food.food);
-        render(player.snake_1,player.snake_2,player.snake_3,food.food);
     }
 }
 
-void Game::render(sf::RectangleShape &snake_1,sf::RectangleShape &snake_2,sf::RectangleShape &snake_3,sf::CircleShape &food)
-{ 
-    window.clear();
-    window.draw(snake_1);
-    window.draw(snake_2);
-    window.draw(snake_3);
-    window.draw(food);
-    window.display();
-}
