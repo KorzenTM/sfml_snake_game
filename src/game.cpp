@@ -22,6 +22,10 @@ void Game::run()
     Food food;
     Game_Engine game_engine;
     sf::Event event;
+    sf::RectangleShape snakes[100];
+    snakes[0]=player.snake_1;
+    snakes[1]=player.snake_2;
+    snakes[2]=player.snake_3;
     player.snake_1.setPosition(WIDTH/2,HEIGHT/2);
     player.snake_2.setPosition((WIDTH/2)-20,HEIGHT/2);
     player.snake_3.setPosition((WIDTH/2)-40,HEIGHT/2);
