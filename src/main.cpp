@@ -5,6 +5,8 @@
 
 int main()
 {
-    Game game;
-    game.run();
+    const int WIDTH = 800;
+    const int HEIGHT = 600;
+    Game_Window game(WIDTH, HEIGHT);
+    game.Show_Window();
 }

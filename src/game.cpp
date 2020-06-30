@@ -1,38 +1,51 @@
 #include "game.h"
-#include "game_engine.h"
-#include "game_engine.cpp"
 #include "player.h"
 #include "player.cpp"
 #include "food.h"
 #include "food.cpp"
-#include <ctime>
 
 
-
-Game::Game():window(sf::VideoMode(WIDTH,HEIGHT),"SNAKE")
+Game_Window::Game_Window(int WIDTH, int HEIGHT):m_width(WIDTH), m_height(HEIGHT)
 {
-    window.setFramerateLimit(60);
-    
+    window.create(sf::VideoMode(m_width, m_height), "SNAKE", sf::Style::Titlebar | sf::Style::Close);
+    window.setFramerateLimit(1);
 }
 
-void Game::run()
+void Game_Window::Show_Window()
 {
-    srand(time(NULL));
-    Player player;
-    Food food;
-    Game_Engine game_engine;
-    sf::Event event;
-    sf::RectangleShape snakes[100];
-    snakes[0]=player.snake_1;
-    snakes[1]=player.snake_2;
-    snakes[2]=player.snake_3;
-    player.snake_1.setPosition(WIDTH/2,HEIGHT/2);
-    player.snake_2.setPosition((WIDTH/2)-20,HEIGHT/2);
-    player.snake_3.setPosition((WIDTH/2)-40,HEIGHT/2);
-    food.food.setPosition((std::rand()%(WIDTH/20)+0)*20,(std::rand()%(HEIGHT/20)+0)*20);
+    //srand(time(NULL));
+    //food.food.setPosition((std::rand()%(WIDTH/20)+0)*20,(std::rand()%(HEIGHT/20)+0)*20);
+    Player player(10, 400, 300);
+    player.set_start_position();
     while(window.isOpen())
     {
-        game_engine.processEvents(event,window,player.snake_1,player.snake_2,player.snake_3,food.food);
+        sf::Event event;
+        player.move();
+        while (window.pollEvent(event))
+        {
+            switch(event.type)
+            {
+                case sf::Event::Closed:
+                    window.close();
+                    break;
+                case sf::Event::KeyPressed:
+                    if(event.key.code==sf::Keyboard::Escape)
+                    {
+                        window.close();
+                    }
+                    else
+                    {
+                        player.snake_control(event, window);
+                    }
+            }
+        }
+
+        window.clear();
+        player.draw_snake(window);
+        window.display();
     }
 }
+
+
+
 
