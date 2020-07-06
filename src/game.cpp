@@ -14,6 +14,9 @@ void Game_Window::Show_Window()
 {
     //srand(time(NULL));
     //food.food.setPosition((std::rand()%(WIDTH/20)+0)*20,(std::rand()%(HEIGHT/20)+0)*20);
+    Food food(m_width, m_height, 10);
+    food.set_position();
+
     Player player(10, 400, 300);
     player.set_start_position();
     int start_direction = 1;
@@ -26,7 +29,6 @@ void Game_Window::Show_Window()
             player.move(start_direction);
             clock.restart();
         }
-
         //float delta = clock.restart().asSeconds();
 
         while (window.pollEvent(event)) {
@@ -46,6 +48,7 @@ void Game_Window::Show_Window()
 
         window.clear(sf::Color(255,255,255));
         player.draw(window);
+        food.draw(window);
         window.display();
     }
 }

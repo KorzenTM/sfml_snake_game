@@ -12,7 +12,7 @@ public:
     void move(int &direction);
     void set_direction(sf::Event &event, int &direction);
     void set_start_position();
-    void set_position(sf::Vector2f &last_head_position, int direction);
+    void set_position(sf::Vector2f &last_head_position);
     void boundaries_cross(double window_width, double window_height);
     void draw(sf::RenderWindow &thatWindow);
     ~Player() {};

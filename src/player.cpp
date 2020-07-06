@@ -54,9 +54,20 @@ void Player::move(int &direction)
         default:
             break;
     }
-    std::cout << Snakes[0].getPosition().x << " " << Snakes[0].getPosition().y << "\n";
-    set_position(lastPosition, direction);
+    set_position(lastPosition);
     boundaries_cross(800,600);
+}
+
+void Player::set_position(sf::Vector2f &last_head_position)
+{
+    sf::Vector2f newPosition (last_head_position);
+    for(int i = 1; i < Snakes.size(); i++)
+    {
+        last_head_position = Snakes[i].getPosition();
+        Snakes[i].setPosition(newPosition.x , newPosition.y);
+        newPosition = last_head_position;
+    }
+
 }
 
 void Player::set_direction(sf::Event &event, int &direction)
@@ -93,18 +104,6 @@ void Player::set_direction(sf::Event &event, int &direction)
         }
         direction = left;
     }
-}
-
-void Player::set_position(sf::Vector2f &last_head_position, int direction)
-{
-    sf::Vector2f newPosition (last_head_position);
-    for(int i = 1; i < Snakes.size(); i++)
-    {
-        last_head_position = Snakes[i].getPosition();
-        Snakes[i].setPosition(newPosition.x , newPosition.y);
-        newPosition = last_head_position;
-    }
-
 }
 
 void Player::boundaries_cross(double window_width, double window_height)
