@@ -12,7 +12,8 @@ private:
 public:
     Collision();
     void if_snake_out_of_window(sf::RenderWindow &thatWindow, std::vector<sf::RectangleShape> &Snakes);
-    bool if_snakes_with_body_collision(const std::vector<sf::RectangleShape> &Snakes);
+    bool if_snakes_with_body_collision(std::vector<sf::RectangleShape> &Snakes);
+    bool if_snake_eat_food(sf::FloatRect food_bounds, sf::FloatRect snake_bounds);
     ~Collision() {};
 };
 

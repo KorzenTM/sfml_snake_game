@@ -1,5 +1,6 @@
 #include "food.h"
 #include <iostream>
+
 Food::Food(int WIDTH, int HEIGHT, int radius): m_width(WIDTH), m_height(HEIGHT), m_radius(radius)
 {
     food.setRadius(radius);

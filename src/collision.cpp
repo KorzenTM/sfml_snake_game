@@ -8,7 +8,6 @@ void Collision::if_snake_out_of_window(sf::RenderWindow &thatWindow, std::vector
     p_snake_size = Snakes[0].getSize().x;
     p_snake_head_position.x = Snakes[0].getPosition().x;
     p_snake_head_position.y = Snakes[0].getPosition().y;
-    std::cout << p_snake_head_position.x << " " << p_snake_head_position.y << "\n";
 
     if(p_snake_head_position.x + p_snake_size > thatWindow.getSize().x)
     {
@@ -28,21 +27,27 @@ void Collision::if_snake_out_of_window(sf::RenderWindow &thatWindow, std::vector
     }
 }
 
-bool Collision::if_snakes_with_body_collision(const std::vector<sf::RectangleShape> &Snakes)
+bool Collision::if_snakes_with_body_collision(std::vector<sf::RectangleShape> &Snakes)
 {
     for (size_t i = 1; i < Snakes.size(); i++)
     {
         if (Snakes[0].getGlobalBounds().intersects(Snakes[i].getGlobalBounds()))
         {
-            //speed = 0;
-            //collision_information();
-            std::cout << "Uderzylem sie!\n";
             return true;
         }
     }
-    //collision_text.setString("");
-    //key_press_information.setString("");
     return false;
 }
+
+bool Collision::if_snake_eat_food(sf::FloatRect food_bounds, sf::FloatRect snake_bounds)
+{
+    if (snake_bounds.intersects(food_bounds))
+    {
+        return true;
+    }
+    return false;
+}
+
+
 
 

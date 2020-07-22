@@ -3,7 +3,7 @@
 
 #pragma once
 #include <SFML/Graphics.hpp>
-
+#include "game.h"
 
 class Food
 {
@@ -13,6 +13,7 @@ public:
     void set_food_position();
     void draw_food(sf::RenderWindow &thatWindow);
     sf::Vector2f get_random_position();
+    sf::FloatRect get_food_global_bounds() {return food.getGlobalBounds();}
     ~Food() {};
 protected:
     sf::CircleShape food;

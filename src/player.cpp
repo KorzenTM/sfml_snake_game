@@ -1,11 +1,15 @@
 #include "player.h"
 #include <iostream>
+
 enum direction{left, right, up, down};
 
 Player::Player(int snake_length, double x_start_position, double y_start_position): m_snake_length(snake_length),
         m_x_start_position(x_start_position), m_y_start_position(y_start_position)
 {
-    assert(m_snake_length > 0);
+    if (m_snake_length == 0)
+    {
+        throw std::invalid_argument("Snake length can not be 0!");
+    }
     Part_of_Snake.setSize(sf::Vector2f(snake_size, snake_size));
     Part_of_Snake.setFillColor(sf::Color(1, 145, 0));
     Snakes.resize(m_snake_length);
@@ -17,7 +21,7 @@ Player::Player(int snake_length, double x_start_position, double y_start_positio
 
 void Player::set_start_position()
 {
-    speed = 20.0;
+    set_snake_speed(20.f);
     Snakes[0].setPosition(m_x_start_position, m_y_start_position);
     for(size_t i = 1; i < Snakes.size(); i++)
     {
@@ -67,43 +71,34 @@ void Player::move(int &direction)
     switch(direction)
     {
         case left:
-            Snakes[0].move(-speed  ,0.f);
+            Snakes[0].move(-m_speed  , 0.f);
             break;
         case right:
-            Snakes[0].move(speed ,0.f);
+            Snakes[0].move(m_speed , 0.f);
             break;
         case up:
-            Snakes[0].move(0.f,-speed );
+            Snakes[0].move(0.f,-m_speed );
             break;
         case down:
-            Snakes[0].move(0.f,speed );
+            Snakes[0].move(0.f, m_speed );
             break;
         default:
             break;
     }
-    if (speed > 0.0)
-    {
-        set_snake_position(lastPosition);
-    }
-    //if (check_collision())
-    //{
-    //    direction = 1;
-    //}
-    //if (ate_food())
-    //{
-     //   resize_snake();
-    //}
-    //boundaries_cross(800,600);
+    set_snake_position(lastPosition);
 }
 
 void Player::set_snake_position(sf::Vector2f &last_head_position)
 {
-    sf::Vector2f newPosition (last_head_position);
-    for(int i = 1; i < Snakes.size(); i++)
+    if (m_speed > 0)
     {
-        last_head_position = Snakes[i].getPosition();
-        Snakes[i].setPosition(newPosition.x , newPosition.y);
-        newPosition = last_head_position;
+        sf::Vector2f newPosition (last_head_position);
+        for(int i = 1; i < Snakes.size(); i++)
+        {
+            last_head_position = Snakes[i].getPosition();
+            Snakes[i].setPosition(newPosition.x , newPosition.y);
+            newPosition = last_head_position;
+        }
     }
 }
 
@@ -120,8 +115,6 @@ void Player::draw_snake(sf::RenderWindow &thatWindow)
     {
         thatWindow.draw(Snake);
     }
-    thatWindow.draw(collision_text);
-    thatWindow.draw(key_press_information);
 }
 
 

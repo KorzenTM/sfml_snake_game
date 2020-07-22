@@ -4,6 +4,7 @@
 #include "food.h"
 #include "food.cpp"
 #include "collision.h"
+#include "informations.h"
 #include <iostream>
 
 Game_Window::Game_Window(int WIDTH, int HEIGHT):m_width(WIDTH), m_height(HEIGHT)
@@ -15,6 +16,7 @@ Game_Window::Game_Window(int WIDTH, int HEIGHT):m_width(WIDTH), m_height(HEIGHT)
 void Game_Window::Show_Window()
 {
     sf::Clock clock;
+    Informations informations("..\\fonts\\arial.ttf");
     Collision collision;
     Food food(m_width, m_height, 10);
     Player player(10, 400, 300);
@@ -41,27 +43,38 @@ void Game_Window::Show_Window()
                     break;
 
                 case sf::Event::KeyPressed:
-                    if (collision.if_snakes_with_body_collision(player.get_snakes_table()))
-                    {
-                        if (event.key.code == sf::Keyboard::Enter)
-                        {
-                            //food.set_food_position();
-                            player.set_start_position();
-                        }
-                        else if (event.key.code == sf::Keyboard::Escape)
-                        {
-                            window.close();
-                        }
-                    }
-                    else
-                    {
-                        player.set_direction(event, start_direction);
-                    }
+                    player.set_direction(event, start_direction);
+                    break;
             }
         }
+
+        if (collision.if_snakes_with_body_collision(player.get_snakes_table()))
+        {
+            informations.collision_information();
+            player.set_snake_speed(0.f);
+            if (event.key.code == sf::Keyboard::Enter)
+            {
+                food.set_food_position();
+                player.set_start_position();
+                informations.clear_text();
+                start_direction = 1;
+            }
+            else if (event.key.code == sf::Keyboard::Escape)
+            {
+                window.close();
+            }
+        }
+
+        if (collision.if_snake_eat_food(food.get_food_global_bounds(), player.get_snake_global_bounds()))
+        {
+            food.set_food_position();
+            player.resize_snake();
+        }
+
         window.clear(sf::Color(255,255,255));
         player.draw_snake(window);
         food.draw_food(window);
+        informations.draw_informations(window);
         window.display();
     }
 }
