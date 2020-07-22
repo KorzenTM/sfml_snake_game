@@ -6,15 +6,14 @@ Food::Food(int WIDTH, int HEIGHT, int radius): m_width(WIDTH), m_height(HEIGHT),
     food.setFillColor(sf::Color(132, 0, 0));
 }
 
-void Food::draw(sf::RenderWindow &thatWindow)
+void Food::draw_food(sf::RenderWindow &thatWindow)
 {
     thatWindow.draw(food);
 }
 
-void Food::set_position()
+void Food::set_food_position()
 {
     temp_position = get_random_position();
-    std::cout << temp_position.x << " " << temp_position.y << "\n";
     food.setPosition(temp_position.x, temp_position.y);
 }
 

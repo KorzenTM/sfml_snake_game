@@ -4,16 +4,17 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+
 class Food
 {
 public:
 
     Food(int WIDTH, int HEIGHT, int radius);
-    void set_position();
-    void draw(sf::RenderWindow &thatWindow);
+    void set_food_position();
+    void draw_food(sf::RenderWindow &thatWindow);
     sf::Vector2f get_random_position();
     ~Food() {};
-private:
+protected:
     sf::CircleShape food;
     int m_width, m_height;
     int m_radius;
