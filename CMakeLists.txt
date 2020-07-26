@@ -9,5 +9,5 @@ set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR "C:/SFML-2.5.1/lib/cmake/SFML")
 
 find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
-add_executable(SNAKE src/main.cpp include/collision.h src/collision.cpp include/informations.h src/informations.cpp)
+add_executable(SNAKE src/main.cpp include/collision.h src/collision.cpp include/informations.h src/informations.cpp src/score_board.cpp include/score_board.h)
 target_link_libraries(SNAKE sfml-graphics sfml-audio)

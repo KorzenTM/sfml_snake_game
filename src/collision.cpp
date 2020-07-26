@@ -48,6 +48,18 @@ bool Collision::if_snake_eat_food(sf::FloatRect food_bounds, sf::FloatRect snake
     return false;
 }
 
+bool Collision::if_food_generate_on_snake(std::vector<sf::RectangleShape> &Snakes, sf::FloatRect food_bounds)
+{
+    for (size_t i = 1; i < Snakes.size(); i++)
+    {
+        if (Snakes[0].getGlobalBounds().intersects(food_bounds))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 
 
 

@@ -6,6 +6,13 @@
 
 class Player
 {
+private:
+    int m_snake_length;
+    double m_x_start_position, m_y_start_position;
+    const double snake_size = 20.0;
+    double m_speed;
+    sf::RectangleShape Part_of_Snake;
+    std::vector<sf::RectangleShape> Snakes;
 public:
     Player(int snake_length, double x_start_position, double y_start_position);
     void resize_snake();
@@ -21,12 +28,5 @@ public:
     sf::FloatRect get_snake_global_bounds() {return Snakes[0].getGlobalBounds();};
     ~Player() {};
 
-private:
-    int m_snake_length;
-    double m_x_start_position, m_y_start_position;
-    const double snake_size = 20.0;
-    double m_speed;
-    sf::RectangleShape Part_of_Snake;
-    std::vector<sf::RectangleShape> Snakes;
 };
 #endif //SFMLTEST_PLAYER_H
