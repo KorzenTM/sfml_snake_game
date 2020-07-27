@@ -1,10 +1,15 @@
 #include "informations.h"
 
-Informations::Informations(std::string font_localization):m_font_localization(font_localization)
+Informations::Informations(std::string font_localization, int window_width, int window_height):
+m_font_localization(font_localization), m_window_width(window_width), m_window_height(window_height)
 {
     if (!font.loadFromFile(m_font_localization))
     {
         throw std::invalid_argument("No font file in the specified location");
+    }
+    else if ((m_window_height < 0) or (m_window_width < 0))
+    {
+        throw std::invalid_argument("Wrong resolution");
     }
 }
 
@@ -36,14 +41,14 @@ void Informations::show_getting_points_information(sf::Vector2f food_position)
 
 }
 
-void Informations::show_title(int width, int height)
+void Informations::show_title()
 {
     m_game_title.setFont(font);
     m_game_title.setString("SNAKE");
     m_game_title.setCharacterSize(50);
     m_game_title.setFillColor(sf::Color::Green);
     m_game_title.setStyle(sf::Text::Bold);
-    m_game_title.setPosition(width / 2.5,height / 4);
+    m_game_title.setPosition((m_window_width / 2.5),(m_window_height / 6.0));
 }
 
 void Informations::draw_informations(sf::RenderWindow &thatWindow)

@@ -14,9 +14,11 @@ private:
     sf::Text m_key_press_information;
     sf::Text m_getting_points_information;
     sf::Text m_game_title;
+    int m_window_width;
+    int m_window_height;
 public:
-    Informations(std::string font_localization);
-    void show_title(int width, int height);
+    Informations(std::string font_localization, int window_width, int window_height);
+    void show_title();
     void show_collision_information();
     void show_getting_points_information(sf::Vector2f food_position);
     void draw_informations(sf::RenderWindow &thatWindow);
