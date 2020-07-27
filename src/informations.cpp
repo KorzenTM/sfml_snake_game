@@ -8,7 +8,7 @@ Informations::Informations(std::string font_localization):m_font_localization(fo
     }
 }
 
-void Informations::collision_information()
+void Informations::show_collision_information()
 {
     m_collision_text.setFont(font);
     m_collision_text.setString("Impact detected.\n     Try again!");
@@ -25,14 +25,7 @@ void Informations::collision_information()
     m_key_press_information.setPosition(260,450);
 }
 
-void Informations::clear_text()
-{
-    m_collision_text.setString("");
-    m_key_press_information.setString("");
-    m_getting_points_information.setString("");
-}
-
-void Informations::getting_points_information(sf::Vector2f food_position)
+void Informations::show_getting_points_information(sf::Vector2f food_position)
 {
     m_getting_points_information.setFont(font);
     m_getting_points_information.setString("10 points for you!");
@@ -43,10 +36,22 @@ void Informations::getting_points_information(sf::Vector2f food_position)
 
 }
 
+void Informations::show_title(int width, int height)
+{
+    m_game_title.setFont(font);
+    m_game_title.setString("SNAKE");
+    m_game_title.setCharacterSize(50);
+    m_game_title.setFillColor(sf::Color::Green);
+    m_game_title.setStyle(sf::Text::Bold);
+    m_game_title.setPosition(width / 2.5,height / 4);
+}
+
 void Informations::draw_informations(sf::RenderWindow &thatWindow)
 {
     thatWindow.draw(m_collision_text);
     thatWindow.draw(m_key_press_information);
     thatWindow.draw(m_getting_points_information);
+    thatWindow.draw(m_game_title);
 }
+
 

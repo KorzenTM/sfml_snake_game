@@ -1,20 +1,18 @@
 #include "game.h"
 #include "player.h"
-#include "player.cpp"
 #include "food.h"
-#include "food.cpp"
 #include "collision.h"
 #include "informations.h"
 #include "score_board.h"
 #include <iostream>
 
-Game_Window::Game_Window(int WIDTH, int HEIGHT):m_width(WIDTH), m_height(HEIGHT)
+Game_Board::Game_Board(int WIDTH, int HEIGHT): m_width(WIDTH), m_height(HEIGHT)
 {
     window.create(sf::VideoMode(m_width, m_height), "SNAKE", sf::Style::Titlebar | sf::Style::Close);
     window.setFramerateLimit(60);
 }
 
-void Game_Window::Show_Window()
+void Game_Board::show_game_board()
 {
     sf::Clock clock;
     Score_Board score_board("..\\fonts\\arial.ttf", 0);
@@ -36,13 +34,16 @@ void Game_Window::Show_Window()
         {
             player.move(start_direction);
             collision.if_snake_out_of_window(window, player.get_snakes_table());
-            informations.clear_text();
+            informations.clear_getting_points_information();
             clock.restart();
         }
 
         while (window.pollEvent(event)) {
             switch (event.type)
             {
+                case sf::Event::Closed:
+                    window.close();
+                    break;
                 case sf::Event::KeyPressed:
                     player.set_direction(event, start_direction);
                     break;
@@ -51,14 +52,14 @@ void Game_Window::Show_Window()
 
         if (collision.if_snakes_with_body_collision(player.get_snakes_table()))
         {
-            informations.collision_information();
+            informations.show_collision_information();
             player.set_snake_speed(0.f);
             score_board.reset_points();
             if (event.key.code == sf::Keyboard::Enter)
             {
                 food.set_food_position();
                 player.set_start_position();
-                informations.clear_text();
+                informations.clear_collision_information();
                 start_direction = 1;
             }
             else if (event.key.code == sf::Keyboard::Escape)
@@ -68,7 +69,7 @@ void Game_Window::Show_Window()
         }
         else if (collision.if_snake_eat_food(food.get_food_global_bounds(), player.get_snake_global_bounds()))
         {
-            informations.getting_points_information(food.get_food_position());
+            informations.show_getting_points_information(food.get_food_position());
             food.set_food_position();
             player.resize_snake();
             score_board.add_score();

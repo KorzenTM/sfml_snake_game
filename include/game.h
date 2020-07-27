@@ -4,16 +4,15 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 
-class Game_Window
+class Game_Board
 {
 private:
     sf::RenderWindow window;
     const int m_width;
     const int m_height;
 public:
-    Game_Window(int WIDTH, int HEIGHT);
-    Game_Window();
-    void Show_Window();
-    ~Game_Window() {};
+    Game_Board(int WIDTH, int HEIGHT);
+    void show_game_board();
+    ~Game_Board() {};
 };
 #endif //SFMLTEST_GAME_H
