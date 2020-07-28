@@ -14,10 +14,14 @@ private:
     sf::Text m_key_press_information;
     sf::Text m_getting_points_information;
     sf::Text m_game_title;
+    sf::Text m_quit_button_text;
+    sf::Text m_start_button_text;
     int m_window_width;
     int m_window_height;
 public:
     Informations(std::string font_localization, int window_width, int window_height);
+    void set_quit_button_text(sf::FloatRect quit_button_global_bounds);
+    void set_start_button_text(sf::FloatRect start_button_global_bounds);
     void show_title();
     void show_collision_information();
     void show_getting_points_information(sf::Vector2f food_position);

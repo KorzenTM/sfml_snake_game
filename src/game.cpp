@@ -4,6 +4,7 @@
 #include "collision.h"
 #include "informations.h"
 #include "score_board.h"
+#include "game_menu.h"
 #include <iostream>
 
 Game_Board::Game_Board()
@@ -63,7 +64,9 @@ void Game_Board::show_game_board(sf::RenderWindow &thatWindow)
             }
             else if (event.key.code == sf::Keyboard::Escape)
             {
+                Game_Menu gameMenu(thatWindow.getSize().x, thatWindow.getSize().y);
                 thatWindow.close();
+                gameMenu.show_menu();
             }
         }
         else if (collision.if_snake_eat_food(food.get_food_global_bounds(), player.get_snake_global_bounds()))
