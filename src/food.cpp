@@ -1,15 +1,11 @@
 #include "food.h"
 #include <iostream>
 
-Food::Food(int WIDTH, int HEIGHT, int radius): m_width(WIDTH), m_height(HEIGHT), m_radius(radius)
+Food::Food(std::string textureLocalization, int WIDTH, int HEIGHT, int radius) :
+        Textures("..\\resources\\images\\apple.png"), m_width(WIDTH), m_height(HEIGHT),
+        m_radius(radius)
 {
-    food.setRadius(radius);
-    food.setFillColor(sf::Color(132, 0, 0));
-}
-
-void Food::draw_food(sf::RenderWindow &thatWindow)
-{
-    thatWindow.draw(food);
+    food.setRadius(m_radius);
 }
 
 void Food::set_food_position()
@@ -25,5 +21,11 @@ sf::Vector2f Food::get_random_position()
     food_position.x = m_x_position;
     food_position.y = m_y_position;
     return food_position;
+}
+
+void Food::draw_food(sf::RenderWindow &thatWindow)
+{
+    set_food_texture(food);
+    thatWindow.draw(food);
 }
 

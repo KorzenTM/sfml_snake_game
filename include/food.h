@@ -3,9 +3,9 @@
 
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "game.h"
+#include "textures.h"
 
-class Food
+class Food : public Textures
 {
 private:
     sf::CircleShape food;
@@ -14,11 +14,11 @@ private:
     double m_x_position, m_y_position;
     sf::Vector2f food_position;
     sf::Vector2f temp_position;
+    sf::Vector2f get_random_position();
 public:
-    Food(int WIDTH, int HEIGHT, int radius);
+    Food(std::string textureLocalization, int WIDTH, int HEIGHT, int radius);
     void set_food_position();
     void draw_food(sf::RenderWindow &thatWindow);
-    sf::Vector2f get_random_position();
     inline sf::FloatRect get_food_global_bounds() {return food.getGlobalBounds();}
     inline sf::Vector2f get_food_position() {return food_position;}
     ~Food() {};

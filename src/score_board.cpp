@@ -15,7 +15,8 @@ void Score_Board::create_score_board(int width, int height)
     m_score_board.setString("Score = " + std::to_string(m_points));
     m_score_board.setCharacterSize(18);
     m_score_board.setFillColor(sf::Color::Red);
-    m_score_board.setPosition(width / 2 - 50.f, height - 20.f);
+    m_score_board.setPosition((width / 2.f) - (m_score_board.getLocalBounds().width / 2.f),
+                              (height) - (m_score_board.getLocalBounds().height * 2.f));
     m_score_board.setStyle(sf::Text::Bold);
 }
 

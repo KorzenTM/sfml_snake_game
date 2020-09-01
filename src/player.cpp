@@ -3,15 +3,15 @@
 
 enum direction{left, right, up, down};
 
-Player::Player(int snake_length, double x_start_position, double y_start_position): m_snake_length(snake_length),
+Player::Player(int snake_length, double x_start_position, double y_start_position):
+Textures("..\\resources\\images\\snake_body.png"), m_snake_length(snake_length),
         m_x_start_position(x_start_position), m_y_start_position(y_start_position)
 {
     if (m_snake_length == 0)
     {
         throw std::invalid_argument("Snake length can not be 0!");
     }
-    Part_of_Snake.setSize(sf::Vector2f(snake_size, snake_size));
-    Part_of_Snake.setFillColor(sf::Color(1, 145, 0));
+    Part_of_Snake.setSize(sf::Vector2f(m_snake_size, m_snake_size));
     Snakes.resize(m_snake_length);
     for(auto & Snake : Snakes)
     {
@@ -21,11 +21,11 @@ Player::Player(int snake_length, double x_start_position, double y_start_positio
 
 void Player::set_start_position()
 {
-    set_snake_speed(20.f);
+    set_snake_speed(m_snake_size);
     Snakes[0].setPosition(m_x_start_position, m_y_start_position);
     for(size_t i = 1; i < Snakes.size(); i++)
     {
-        Snakes[i].setPosition(Snakes[i-1].getPosition().x - snake_size, Snakes[i - 1].getPosition().y);
+        Snakes[i].setPosition(Snakes[i-1].getPosition().x - m_snake_size, Snakes[i - 1].getPosition().y);
     }
 }
 
@@ -111,9 +111,18 @@ void Player::resize_snake()
 
 void Player::draw_snake(sf::RenderWindow &thatWindow)
 {
-    for(auto & Snake : Snakes)
+    for(size_t i = 0; i < Snakes.size(); i++)
     {
-        thatWindow.draw(Snake);
+        if (i == 0)
+        {
+            Textures test(R"(..\resources\images\snake_head.png)");
+            test.set_snake_texture(Snakes[i]);
+        }
+        else
+        {
+            set_snake_texture(Snakes[i]);
+        }
+        thatWindow.draw(Snakes[i]);
     }
 }
 

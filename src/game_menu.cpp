@@ -1,6 +1,8 @@
 #include "game_menu.h"
-#include "informations.h"
+#include "Subtitles.h"
 #include "game.h"
+#include "textures.h"
+#include "images.h"
 #include <iostream>
 
 Game_Menu::Game_Menu(int WIDTH, int HEIGHT): m_width(WIDTH), m_height(HEIGHT)
@@ -11,8 +13,10 @@ Game_Menu::Game_Menu(int WIDTH, int HEIGHT): m_width(WIDTH), m_height(HEIGHT)
 
 void Game_Menu::show_menu()
 {
-    Informations title("..\\fonts\\Gameplay.ttf", m_width, m_height);
-    Informations buttons_text("..\\fonts\\arial.ttf", m_width, m_height);
+    Subtitles title("..\\fonts\\Gameplay.ttf", m_width, m_height);
+    Subtitles buttons_text("..\\fonts\\arial.ttf", m_width, m_height);
+    Images background_image("..\\resources\\images\\background.jpg", m_width, m_height);
+    Images snake_logo("..\\resources\\images\\snake.png", m_width, m_height);
 
     create_quit_button();
     buttons_text.set_quit_button_text(m_quit_button.getGlobalBounds());
@@ -21,8 +25,8 @@ void Game_Menu::show_menu()
     buttons_text.set_start_button_text(m_start_button.getGlobalBounds());
 
     title.show_title();
-    set_background_image();
-    show_logo();
+    background_image.set_menu_background_image();
+    snake_logo.show_logo();
 
     while (menu_window.isOpen())
     {
@@ -39,42 +43,13 @@ void Game_Menu::show_menu()
         quit_button_hover();
         start_button_hover();
         menu_window.clear();
-        menu_window.draw(background);
-        menu_window.draw(snake_sprite);
+        background_image.draw_menu_background_image(menu_window);
+        snake_logo.draw_logo(menu_window);
         menu_window.draw(m_quit_button);
         menu_window.draw(m_start_button);
-        title.draw_informations(menu_window);
-        buttons_text.draw_informations(menu_window);
+        title.draw_menu_text(menu_window);
+        buttons_text.draw_menu_text(menu_window);
         menu_window.display();
-    }
-
-}
-
-void Game_Menu::set_background_image()
-{
-    if (!background_texture.loadFromFile("..\\resources\\images\\background.jpg"))
-    {
-        throw std::invalid_argument("No file found");
-    }
-    else
-    {
-        background_texture.setRepeated(true);
-        background.setTexture(background_texture);
-        background.setTextureRect(sf::IntRect (0,0, m_width, m_height));
-    }
-}
-
-void Game_Menu::show_logo()
-{
-    if (!snake_texture.loadFromFile("..\\resources\\images\\snake.png"))
-    {
-        throw std::invalid_argument("No file found");
-    }
-    else
-    {
-        snake_sprite.setTexture(snake_texture);
-        snake_sprite.setScale(0.5, 0.5);
-        snake_sprite.setPosition(50, 300);
     }
 
 }
@@ -83,13 +58,6 @@ void Game_Menu::create_quit_button()
 {
     m_quit_button.setSize(sf::Vector2f(150.f, 50.f));
     m_quit_button.setPosition(m_width - 170.f, m_height - 70.f);
-}
-
-void Game_Menu::create_start_button()
-{
-    m_start_button.setSize(sf::Vector2f(160.f, 80.f));
-    m_start_button.setPosition(m_width / 2.5, m_height / 2.5);
-
 }
 
 void Game_Menu::quit_button_hover()
@@ -119,6 +87,13 @@ void Game_Menu::quit_button_clicked()
     {
         menu_window.close();
     }
+}
+
+void Game_Menu::create_start_button()
+{
+    m_start_button.setSize(sf::Vector2f(160.f, 80.f));
+    m_start_button.setPosition(m_width / 2.5, m_height / 2.5);
+
 }
 
 void Game_Menu::start_button_hover()

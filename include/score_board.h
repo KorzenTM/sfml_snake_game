@@ -16,6 +16,7 @@ public:
     void create_score_board(int width, int height);
     void reset_points();
     void draw_score_board(sf::RenderWindow &thatWindow);
+    inline int get_points() const {return m_points;};
     ~Score_Board() {};
 
     void add_score();

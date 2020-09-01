@@ -2,15 +2,11 @@
 #define SNAKE_GAME_MENU_H
 
 #include <SFML/Graphics.hpp>
-#include "informations.h"
+#include "Subtitles.h"
 
 class Game_Menu
 {
 private:
-    sf::Texture background_texture;
-    sf::Sprite background;
-    sf::Texture snake_texture;
-    sf::Sprite snake_sprite;
     sf::RenderWindow menu_window;
     const int m_width;
     const int m_height;
@@ -24,8 +20,6 @@ public:
     void start_button_hover();
     void create_start_button();
     void start_button_clicked();
-    void show_logo();
-    void set_background_image();
     void show_menu();
     ~Game_Menu() {};
 };
