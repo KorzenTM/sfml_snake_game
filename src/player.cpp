@@ -109,18 +109,18 @@ void Player::resize_snake()
     Snakes.back().setPosition(temp_last_part_position);
 }
 
-void Player::draw_snake(sf::RenderWindow &thatWindow)
+void Player::draw_snake(sf::RenderWindow &thatWindow, int &direction)
 {
+
     for(size_t i = 0; i < Snakes.size(); i++)
     {
         if (i == 0)
         {
-            Textures test(R"(..\resources\images\snake_head.png)");
-            test.set_snake_texture(Snakes[i]);
+            set_head_snake_texture(Snakes[i], direction);
         }
         else
         {
-            set_snake_texture(Snakes[i]);
+            set_snake_body_texture(Snakes[i]);
         }
         thatWindow.draw(Snakes[i]);
     }

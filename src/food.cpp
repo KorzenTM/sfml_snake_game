@@ -11,7 +11,6 @@ Food::Food(std::string textureLocalization, int WIDTH, int HEIGHT, int radius) :
 
 void Food::set_food_position()
 {
-    std::cout << get_random_position().x << " " << get_random_position().y << "\n";
     food.setPosition(get_random_position());
 }
 

@@ -21,7 +21,7 @@ public:
     void set_direction(sf::Event &event, int &direction);
     void set_start_position();
     void set_snake_position(sf::Vector2f &last_head_position);
-    void draw_snake(sf::RenderWindow &thatWindow);
+    void draw_snake(sf::RenderWindow &thatWindow, int &direction);
 
     void set_snake_speed(double speed) {m_speed = speed;};
     std::vector<sf::RectangleShape> & get_snakes_table() {return Snakes;};

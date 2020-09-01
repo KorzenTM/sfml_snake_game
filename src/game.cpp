@@ -88,7 +88,7 @@ void Game_Board::show_game_board(sf::RenderWindow &thatWindow)
         score_board.create_score_board(thatWindow.getSize().x, thatWindow.getSize().y);
         thatWindow.clear();
         game_background.draw_game_background_image(thatWindow);
-        player.draw_snake(thatWindow);
+        player.draw_snake(thatWindow, start_direction);
         food.draw_food(thatWindow);
         informations.draw_collision_information(thatWindow);
         informations.draw_getting_points_information(thatWindow);
