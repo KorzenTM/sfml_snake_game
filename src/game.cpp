@@ -16,8 +16,8 @@ void Game_Board::show_game_board(sf::RenderWindow &thatWindow)
     Score_Board score_board("..\\fonts\\arial.ttf", 0);
     Subtitles informations("..\\fonts\\arial.ttf", thatWindow.getSize().x, thatWindow.getSize().y);
     Collision collision;
-    Food food(std::__cxx11::string(), thatWindow.getSize().x, thatWindow.getSize().y, 15);
-    Player player(10, 400, 300);
+    Food food(std::__cxx11::string(), thatWindow.getSize().x, thatWindow.getSize().y, 20);
+    Player player(10, 400, 320);
     Images game_background("..\\resources\\images\\game_background.png", thatWindow.getSize().x, thatWindow.getSize().y);
     int start_direction = 1;
 

@@ -1,5 +1,6 @@
 #include "food.h"
 #include <iostream>
+#include <iostream>
 
 Food::Food(std::string textureLocalization, int WIDTH, int HEIGHT, int radius) :
         Textures("..\\resources\\images\\apple.png"), m_width(WIDTH), m_height(HEIGHT),
@@ -10,8 +11,8 @@ Food::Food(std::string textureLocalization, int WIDTH, int HEIGHT, int radius) :
 
 void Food::set_food_position()
 {
-    temp_position = get_random_position();
-    food.setPosition(temp_position.x, temp_position.y);
+    std::cout << get_random_position().x << " " << get_random_position().y << "\n";
+    food.setPosition(get_random_position());
 }
 
 sf::Vector2f Food::get_random_position()

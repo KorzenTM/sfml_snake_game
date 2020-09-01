@@ -13,7 +13,6 @@ private:
     int m_radius;
     double m_x_position, m_y_position;
     sf::Vector2f food_position;
-    sf::Vector2f temp_position;
     sf::Vector2f get_random_position();
 public:
     Food(std::string textureLocalization, int WIDTH, int HEIGHT, int radius);

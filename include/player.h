@@ -10,7 +10,7 @@ class Player : public Textures
 private:
     int m_snake_length;
     double m_x_start_position, m_y_start_position;
-    const double m_snake_size = 30.f;
+    const double m_snake_size = 40.f;
     double m_speed;
     sf::RectangleShape Part_of_Snake;
     std::vector<sf::RectangleShape> Snakes;
